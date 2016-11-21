@@ -9,7 +9,10 @@
 namespace AppBundle\Entity;
 
 
-class DiscardPile
+class DiscardPile extends Pile
 {
-
+    public function clear()
+    {
+        $this->cards = array();
+    }
 }

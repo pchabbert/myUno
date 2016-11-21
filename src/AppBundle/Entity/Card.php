@@ -9,7 +9,36 @@
 namespace AppBundle\Entity;
 
 
-class Card
+abstract class Card
 {
+    const COLOR_RED = 'red';
+    const COLOR_YELLOW = 'yellow';
+    const COLOR_BLUE = 'blue';
+    const COLOR_GREEN = 'green';
 
+    public $image;
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 }
