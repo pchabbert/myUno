@@ -14,7 +14,13 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+        },
+        "psr-0": {
+            "": "src/"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "require": {
         "php": ">=5.5.9",
@@ -31,7 +37,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "phpspec/phpspec": "^3.1"
     },
     "scripts": {
         "symfony-scripts": [
