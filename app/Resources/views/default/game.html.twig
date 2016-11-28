@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Game</h1>
+
+    {% if not game.players.isEmpty %}
+        <h2>Players :</h2>
+        <ul>
+            {%  for player in game.players %}
+                <li>{{ player.name }}</li>
+                {% if player == app.user %}
+                    {{ dump(player.hand) }}
+                    {% for card in player.hand %}
+                        {{ dump(player) }}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <h2>Draw Pile</h2>
+    <ul>
+        {% for card in game.drawPile.cards %}
+            {#{% if card.number %}#}
+                <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >{{ card.number|default('bonus') }}</li>
+            {#{% else %}#}
+                {#<li style="display: inline-block; background-color: black }}" >{{ card.bonus }}</li>#}
+            {#{% endif %}#}
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('get_game_start', { 'id': game.id }) }}">Start the game!</a>
+{% endblock %}
+

@@ -7,13 +7,15 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block nav %}
-            <ul>
-                <li><a href="{{ path('homepage') }}">Home</a></li>
-                <li><a href="{{ path('pile') }}">Pile</a></li>
-            </ul>
+    {% for flashMessage in app.session.flashbag.get('error') %}
+
+        {{ flashMessage }}
+
+    {% endfor %}
+        {% block body %}
         {% endblock %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div id="app"></div>
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>

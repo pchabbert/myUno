@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lobby</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ path('post_game_new') }}">New game</a></li>
+        </ul>
+    </nav>
+    <table>
+        <thead>
+            <tr>
+                <th>Game id</th>
+                <th>Game name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.name|default('Game ' ~ game.id) }}</td>
+                    <td><a href="{{ path('game_join', { 'id': game.id }) }}">Join game</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

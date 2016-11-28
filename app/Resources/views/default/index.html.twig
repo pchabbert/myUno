@@ -1,7 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>Hello world !</div>
+    <h1>My Uno</h1>
+    <div>
+        <ul>
+            <li><a href="{{ path('lobby') }}">Join the lobby</a></li>
+        </ul>
 
-    {{ dump(card) }}
+        <form action="{{ path('post_game_new') }}" method="post">
+            <label for="name">Game name</label>
+            <input type="text" id="name" name="game_name">
+            <button type="submit">Create new game</button>
+        </form>
+
+    </div>
+
 {% endblock %}
