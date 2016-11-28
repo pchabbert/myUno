@@ -16,6 +16,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"card" = "Card", "number" = "NumberCard", "bonus" = "BonusCard"})
+ *
  * @JMS\Discriminator(field="class", map = {"bonus": "AppBundle\Entity\BonusCard", "number": "AppBundle\Entity\NumberCard"})
  */
 class Card
@@ -24,6 +25,10 @@ class Card
     const COLOR_YELLOW = 'yellow';
     const COLOR_BLUE = 'blue';
     const COLOR_GREEN = 'green';
+
+    const BONUS_REVERSE = 'reverse';
+    const BONUS_SKIP = 'skip';
+    const BONUS_PLUS2 = 'plus2';
 
     /**
      * @ORM\Id

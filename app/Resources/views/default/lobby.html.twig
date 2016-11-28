@@ -16,11 +16,13 @@
         </thead>
         <tbody>
             {% for game in games %}
+                {% if game.new %}
                 <tr>
                     <td>{{ game.id }}</td>
                     <td>{{ game.name|default('Game ' ~ game.id) }}</td>
                     <td><a href="{{ path('game_join', { 'id': game.id }) }}">Join game</a></td>
                 </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

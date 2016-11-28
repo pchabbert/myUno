@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\BonusCard;
+use AppBundle\Entity\Card;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Player;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -37,15 +38,14 @@ class GameController extends Controller
     public function postGameNewAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $game = $this->get('app.game_factory')->initializeGame();
+            $gameService = $this->get('app.game_service');
+            $game = $gameService->initializeGame();
             $player = $this->getUser();
 
             $game->setName($request->get('game_name'));
-            $game->addPlayer($player);
-//            $player->setGame($game);
+            $gameService->addPlayer($game, $player);
 
             $em = $this->getDoctrine()->getManager();
-//            $em->persist($player);
             $em->persist($game);
             $em->flush();
 
@@ -59,11 +59,11 @@ class GameController extends Controller
      * @Route("/game/{id}", name="get_game")
      * @Method("GET")
      * @param Request $request
+     * @param Game $game
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getGameStateAction(Request $request, Game $game)
     {
-        die(dump($game));
         if (!$game->getPlayers()->contains($this->getUser())) {
             return $this->redirectToRoute('homepage');
         }
@@ -75,15 +75,26 @@ class GameController extends Controller
      * @Route("/game/{id}/start", name="get_game_start")
      * @Method({"GET"})
      * @param Request $request
+     * @param Game $game
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function getGameStartAction(Request $request, Game $game)
     {
-        $this->get('app.game_factory')->start($game);
-        dump('kikoo');
-        dump($game);
-        die();
+        $this->get('app.game_service')->start($game);
 
+        return $this->redirectToRoute('get_game', ['id' => $game->getId()]);
+    }
+
+    /**
+     * @Route("/game/{id}/play/{card_id}", name="play_card")
+     * @Method({"GET"})
+     * @param Request $request
+     * @param Game $game
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function getPlayCardAction(Request $request, Game $game, Card $card)
+    {
+        $this->get('app.game_service')->play($game, $this->getUser(), $card);
 
         return $this->redirectToRoute('get_game', ['id' => $game->getId()]);
     }
@@ -92,28 +103,47 @@ class GameController extends Controller
      * @Route("/game/{id}/join", name="game_join")
      * @Method("GET")
      * @param Request $request
-     * @param $id
+     * @param Game $game
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function gameJoinAction(Request $request, Game $game)
     {
         $player = $this->getUser();
 
-        if (!$game->getPlayers()->contains($player)) {
-            try {
-                $game->addPlayer($player);
-                $player->setGame($game);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($player);
-                $em->flush();
-            } catch (\Exception $e) {
-                $request->getSession()->getFlashBag()->add('error', $e->getMessage());
-                return $this->redirectToRoute('lobby');
-            }
-
+        try {
+            $this->get('app.game_service')->addPlayer($game, $player);
+        } catch (\Exception $e) {
+            $request->getSession()->getFlashBag()
+                ->add('error', $e->getMessage());
+            return $this->redirectToRoute('lobby');
         }
 
         return $this->redirectToRoute('get_game', ['id' => $game->getId()]);
+    }
+
+    /**
+     * @Route("/game/{id}/over", name="game_over")
+     * @Method("GET")
+     * @param Request $request
+     * @param Game $game
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function gameOver(Request $request, Game $game)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($game->getPlayers() as $player) {
+            $player->setGame();
+            $player->getHand()->clear();
+
+            $em->persist($player);
+        }
+
+        $em->remove($game->getDiscardPile());
+        $em->remove($game->getDrawPile());
+        $em->remove($game);
+        $em->flush();
+
+        return $this->redirectToRoute('lobby');
     }
 }

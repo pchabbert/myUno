@@ -26,9 +26,10 @@ abstract class Pile
 
     public function shuffle()
     {
-        if (is_array($this->cards) && !empty($this->cards)) {
-            shuffle($this->cards);
-        }
+        // @FIXME : bonus cards always comes at first
+        $cards = $this->getCards()->toArray();
+        shuffle($cards);
+        $this->setCards(new ArrayCollection($cards));
     }
 
     /**
@@ -40,18 +41,28 @@ abstract class Pile
     }
 
     /**
-     * @param ArrayCollection $cards
-     */
-    public function setCards($cards)
-    {
-        $this->cards = $cards;
-    }
-
-    /**
      * @param Card $card
      */
     public function addCard(Card $card)
     {
         $this->cards[] = $card;
+    }
+
+    /**
+     * Remove card
+     *
+     * @param \AppBundle\Entity\Card $card
+     */
+    public function removeCard(Card $card)
+    {
+        $this->cards->removeElement($card);
+    }
+
+    /**
+     * @param ArrayCollection $cards
+     */
+    public function setCards($cards)
+    {
+        $this->cards = $cards;
     }
 }

@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,6 +66,13 @@ class Player implements UserInterface , \Serializable
      */
     private $hand;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hand = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -99,7 +107,23 @@ class Player implements UserInterface , \Serializable
     }
 
     /**
-     * @return mixed
+     * Set game
+     *
+     * @param \AppBundle\Entity\Game $game
+     *
+     * @return Player
+     */
+    public function setGame(Game $game = null)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \AppBundle\Entity\Game
      */
     public function getGame()
     {
@@ -107,19 +131,35 @@ class Player implements UserInterface , \Serializable
     }
 
     /**
-     * @param mixed $game
-     */
-    public function setGame(Game $game)
-    {
-        $this->game = $game;
-    }
-
-    /**
-     * @return array
+     * @return ArrayCollection
      */
     public function getHand()
     {
         return $this->hand;
+    }
+
+    /**
+     * Add hand
+     *
+     * @param \AppBundle\Entity\Card $hand
+     *
+     * @return Player
+     */
+    public function addHand(Card $hand)
+    {
+        $this->hand[] = $hand;
+
+        return $this;
+    }
+
+    /**
+     * Remove hand
+     *
+     * @param \AppBundle\Entity\Card $hand
+     */
+    public function removeHand(Card $hand)
+    {
+        $this->hand->removeElement($hand);
     }
 
     /**
@@ -129,8 +169,6 @@ class Player implements UserInterface , \Serializable
     {
         $this->hand = $hand;
     }
-
-
 
     /** @see \Serializable::serialize() */
     public function serialize()

@@ -23,7 +23,7 @@ class DiscardPile extends Pile
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="discard_piles_cards",
      *      joinColumns={@ORM\JoinColumn(name="pile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")}

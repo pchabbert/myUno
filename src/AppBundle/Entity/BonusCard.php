@@ -13,9 +13,28 @@ use JMS\Serializer\Annotation as JMS;
 class BonusCard extends Card
 {
     /**
+     * @ORM\Column(type="string")
      * @JMS\Type("string")
      */
-//    public $type = 'bonus';
+    public $bonusType;
 
+    public function __construct($bonusType) {
+        $this->bonusType = $bonusType;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getBonusType()
+    {
+        return $this->bonusType;
+    }
+
+    /**
+     * @param mixed $bonusType
+     */
+    public function setBonusType($bonusType)
+    {
+        $this->bonusType = $bonusType;
+    }
 }

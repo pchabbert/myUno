@@ -37,7 +37,7 @@ class Game
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="DrawPile", cascade={"all"}, fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="DrawPile", cascade={"all"})
      * @ORM\JoinColumn(name="draw_pile_id", referencedColumnName="id")
      * @JMS\Type("AppBundle\Entity\DrawPile")
      * @var DrawPile
@@ -60,6 +60,7 @@ class Game
     private $players;
 
     /**
+     * @ORM\Column(type="boolean")
      * @JMS\Type("boolean")
      * @var bool
      */
@@ -141,6 +142,16 @@ class Game
     }
 
     /**
+     * Remove player
+     *
+     * @param \AppBundle\Entity\Player $player
+     */
+    public function removePlayer(Player $player)
+    {
+        $this->players->removeElement($player);
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getPlayers()
@@ -164,4 +175,13 @@ class Game
         $this->new = $new;
     }
 
+    /**
+     * Get new
+     *
+     * @return boolean
+     */
+    public function getNew()
+    {
+        return $this->new;
+    }
 }

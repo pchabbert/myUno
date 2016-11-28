@@ -7,15 +7,31 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div style="color: red">{{ flashMessage }}</div>
+        {% endfor %}
 
-        {{ flashMessage }}
+        {% block header %}
+            <header>
+                <nav>
+                    {% if is_granted('ROLE_PLAYER') %}
+                        <h1>Profil : {{ app.user.name }}</h1>
+                        <ul>
+                            {% if(app.user.game) %}
+                                <li><a href="{{ path('game_join', { 'id': app.user.game.id }) }}">Recover game</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('lobby') }}">Lobby</a></li>
+                            <li><a href="{{ path('logout') }}">Logout</a></li>
+                        </ul>
+                    {% endif %}
+                </nav>
+            </header>
+        {% endblock %}
 
-    {% endfor %}
-        {% block body %}
-        {% endblock %}
-        <div id="app"></div>
-        {% block javascripts %}
-        {% endblock %}
+        {% block body %}{% endblock %}
+
+        {#<div id="app"></div>#}
+
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

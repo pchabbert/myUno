@@ -4,6 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.game_factory:
+    app.game_service:
         class: AppBundle\Game\GameService
         arguments: [ "@doctrine.orm.entity_manager" ]

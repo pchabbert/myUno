@@ -13,12 +13,6 @@ use JMS\Serializer\Annotation as JMS;
 class NumberCard extends Card
 {
     /**
-     * @ORM\Column(type="string")
-     * @JMS\Type("string")
-     */
-//    public $type = 'number';
-
-    /**
      * @ORM\Column(type="integer")
      * @JMS\Type("integer")
      */
@@ -39,11 +33,39 @@ class NumberCard extends Card
     }
 
     /**
+     * Set number
+     *
+     * @param integer $number
+     *
+     * @return NumberCard
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return NumberCard
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
     }
 
     /**

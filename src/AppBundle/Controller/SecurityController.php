@@ -52,7 +52,7 @@ class SecurityController extends Controller
             $em->persist($player);
             $em->flush();
 
-            return $this->redirectToRoute('lobby');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render(

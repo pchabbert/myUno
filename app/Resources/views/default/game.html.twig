@@ -8,11 +8,11 @@
         <h2>Players :</h2>
         <ul>
             {%  for player in game.players %}
-                <li>{{ player.name }}</li>
+                <li>{{ player.name }} : {{ player.hand.count }}</li>
                 {% if player == app.user %}
-                    {{ dump(player.hand) }}
                     {% for card in player.hand %}
-                        {{ dump(player) }}
+                        <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >
+                            <a href="{{ path('play_card', {'id': game.id, 'card_id': card.id }) }}">{{ card.number|default('bonus') }}</a></li>
                     {% endfor %}
                 {% endif %}
             {% endfor %}
@@ -21,16 +21,33 @@
 
 
     <h2>Draw Pile</h2>
+    <p>Number of cards : {{ game.drawPile.cards.count }}</p>
     <ul>
         {% for card in game.drawPile.cards %}
-            {#{% if card.number %}#}
+            {% if card.number is defined %}
                 <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >{{ card.number|default('bonus') }}</li>
+            {% elseif card.bonusType is defined %}
+                <li style="display: inline-block; background-color: black; color:white" >{{ card.bonusType }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h2>Discard Pile</h2>
+    <p>Number of cards : {{ game.discardPile.cards.count }}</p>
+    <ul>
+        {% for card in game.discardPile.cards %}
+            {#{% if card.number %}#}
+            <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >{{ card.number|default('bonus') }}</li>
             {#{% else %}#}
-                {#<li style="display: inline-block; background-color: black }}" >{{ card.bonus }}</li>#}
+            {#<li style="display: inline-block; background-color: black }}" >{{ card.bonus }}</li>#}
             {#{% endif %}#}
         {% endfor %}
     </ul>
 
-    <a href="{{ path('get_game_start', { 'id': game.id }) }}">Start the game!</a>
+    <hr>
+    {% if game.new %}
+        <a href="{{ path('get_game_start', { 'id': game.id }) }}">Start the game!</a>
+    {% endif %}
+        <a href="{{ path('game_over', { 'id': game.id }) }}">End game</a>
 {% endblock %}
 
