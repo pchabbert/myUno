@@ -2,17 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\BonusCard;
 use AppBundle\Entity\Card;
 use AppBundle\Entity\Game;
-use AppBundle\Entity\Player;
-use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends Controller
 {
@@ -43,7 +38,14 @@ class GameController extends Controller
             $player = $this->getUser();
 
             $game->setName($request->get('game_name'));
-            $gameService->addPlayer($game, $player);
+
+            try {
+                $gameService->addPlayer($game, $player);
+            } catch (\Exception $e) {
+                $request->getSession()->getFlashBag()
+                    ->add('error', $e->getMessage());
+                return $this->redirectToRoute('lobby');
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($game);
@@ -122,6 +124,7 @@ class GameController extends Controller
     }
 
     /**
+     * @TODO: finish it
      * @Route("/game/{id}/over", name="game_over")
      * @Method("GET")
      * @param Request $request
@@ -144,6 +147,6 @@ class GameController extends Controller
         $em->remove($game);
         $em->flush();
 
-        return $this->redirectToRoute('lobby');
+        return $this->redirectToRoute('homepage');
     }
 }

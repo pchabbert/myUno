@@ -37,7 +37,7 @@ class Game
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="DrawPile", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="DrawPile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="draw_pile_id", referencedColumnName="id")
      * @JMS\Type("AppBundle\Entity\DrawPile")
      * @var DrawPile
@@ -45,7 +45,7 @@ class Game
     private $drawPile;
 
     /**
-     * @ORM\OneToOne(targetEntity="DiscardPile", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="DiscardPile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="discard_pile_id", referencedColumnName="id")
      * @JMS\Type("AppBundle\Entity\DiscardPile")
      * @var DiscardPile

@@ -36,6 +36,7 @@
     <h2>Discard Pile</h2>
     <p>Number of cards : {{ game.discardPile.cards.count }}</p>
     <ul>
+        {# Show only the first card #}
         {% set card = game.discardPile.cards.first %}
         {% if card is defined %}
             {% if card.number is defined %}

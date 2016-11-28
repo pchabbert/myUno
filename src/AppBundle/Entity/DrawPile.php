@@ -25,7 +25,7 @@ class DrawPile extends Pile
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinTable(name="draw_piles_cards",
      *      joinColumns={@ORM\JoinColumn(name="pile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")}

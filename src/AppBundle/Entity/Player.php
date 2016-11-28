@@ -57,7 +57,7 @@ class Player implements UserInterface , \Serializable
 
     /**
      * @JMS\Type("ArrayCollection<AppBundle\Entity\Card>")
-     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Card", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinTable(name="players_cards",
      *      joinColumns={@ORM\JoinColumn(name="player_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")}
