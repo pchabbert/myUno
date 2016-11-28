@@ -20,12 +20,13 @@
     {% endif %}
 
 
+    {# @ TODO: hide all drawPile cards + onclick player pick a card #}
     <h2>Draw Pile</h2>
     <p>Number of cards : {{ game.drawPile.cards.count }}</p>
     <ul>
         {% for card in game.drawPile.cards %}
             {% if card.number is defined %}
-                <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >{{ card.number|default('bonus') }}</li>
+                <li style="display: inline-block; background-color: {{ card.color }}" >{{ card.number }}</li>
             {% elseif card.bonusType is defined %}
                 <li style="display: inline-block; background-color: black; color:white" >{{ card.bonusType }}</li>
             {% endif %}
@@ -35,13 +36,14 @@
     <h2>Discard Pile</h2>
     <p>Number of cards : {{ game.discardPile.cards.count }}</p>
     <ul>
-        {% for card in game.discardPile.cards %}
-            {#{% if card.number %}#}
-            <li style="display: inline-block; background-color: {{ card.color|default('black') }}" >{{ card.number|default('bonus') }}</li>
-            {#{% else %}#}
-            {#<li style="display: inline-block; background-color: black }}" >{{ card.bonus }}</li>#}
-            {#{% endif %}#}
-        {% endfor %}
+        {% set card = game.discardPile.cards.first %}
+        {% if card is defined %}
+            {% if card.number is defined %}
+                <li style="display: inline-block; background-color: {{ card.color }}" >{{ card.number }}</li>
+            {% elseif card.bonusType is defined %}
+                <li style="display: inline-block; background-color: black; color:white" >{{ card.bonusType }}</li>
+            {% endif %}
+        {% endif %}
     </ul>
 
     <hr>

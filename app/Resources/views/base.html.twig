@@ -15,7 +15,7 @@
             <header>
                 <nav>
                     {% if is_granted('ROLE_PLAYER') %}
-                        <h1>Profil : {{ app.user.name }}</h1>
+                        <h1>My profile : {{ app.user.name }}</h1>
                         <ul>
                             {% if(app.user.game) %}
                                 <li><a href="{{ path('game_join', { 'id': app.user.game.id }) }}">Recover game</a></li>

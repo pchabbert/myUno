@@ -3,10 +3,6 @@
 {% block body %}
     <h1>My Uno</h1>
     <div>
-        <ul>
-            <li><a href="{{ path('lobby') }}">Join the lobby</a></li>
-        </ul>
-
         <form action="{{ path('post_game_new') }}" method="post">
             <label for="name">Game name</label>
             <input type="text" id="name" name="game_name">
