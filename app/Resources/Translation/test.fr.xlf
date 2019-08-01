@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext" target-language="fr">
+        <body>
+            <trans-unit id="alert.summary.subject">
+                <source>alert.summary.subject</source>
+                <target state="translated">[SHAREMAT] Récapitulatif de vos alertes</target>
+            </trans-unit>
+            <trans-unit id="alert.summary.greetings">
+                <source>alert.summary.greetings</source>
+                <target state="needs-translation">Bonjour</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
