@@ -1,0 +1,3 @@
+files:
+  - source: app/Resources/Translation/*
+    translation: app/Resources/Translation/%two_letters_code%/%original_file_name%
