@@ -1,3 +1,7 @@
+project_identifier: test-lephare
+api_key: 9a32ca14790c9ec64bb11cbdbbf798be
+base_path: /
+preserve_hierarchy: true
 files:
   - source: app/Resources/Translation/*
     translation: app/Resources/Translation/%original_file_name%
