@@ -3,8 +3,7 @@ api_key: 9a32ca14790c9ec64bb11cbdbbf798be
 base_path: /
 preserve_hierarchy: true
 files:
-  - source: /app/Resources/Translation/*
+  - source: app/Resources/Translation/*.xliff
     ignore:
-      - >-
-        /app/Resources/Translation/%file_name%.%two_letters_code%.%file_extension%
-    translation: /app/Resources/Translation/%file_name%.%two_letters_code%.%file_extension%
+      - app/Resources/Translation/*.xlf
+    translation: /app/Resources/Translation/%file_name%.%two_letters_code%.xlf
