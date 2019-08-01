@@ -4,4 +4,7 @@ base_path: /
 preserve_hierarchy: true
 files:
   - source: /app/Resources/Translation/*
+    ignore:
+      - >-
+        /app/Resources/Translation/%file_name%.%two_letters_code%.%file_extension%
     translation: /app/Resources/Translation/%file_name%.%two_letters_code%.%file_extension%
