@@ -1,0 +1,18 @@
+{
+  "en": {
+    "api": {
+      "activity_graphic": {
+        "hourly_chart": "Hourly chart",
+        "hours_of_use": "Hours of use"
+      }
+    }
+  },
+  "fr": {
+    "api": {
+      "activity_graphic": {
+        "hourly_chart": "Graphique horaire",
+        "hours_of_use": "Heures d'utilisation"
+      }
+    }
+  }
+}
