@@ -4,11 +4,11 @@
     <body>
       <trans-unit id="alert.summary.subject">
         <source>alert.summary.subject</source>
-        <target state="needs-translation">alert.summary.subject</target>
+        <target state="translated">Subject</target>
       </trans-unit>
       <trans-unit id="alert.summary.greetings">
         <source>alert.summary.greetings</source>
-        <target state="needs-translation">alert.summary.greetings</target>
+        <target state="translated">Hello!</target>
       </trans-unit>
     </body>
   </file>
