@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" datatype="plaintext" original="file.ext" target-language="es-ES">
+    <body>
+      <trans-unit id="alert.summary.subject">
+        <source>alert.summary.subject</source>
+        <target state="needs-translation">alert.summary.subject</target>
+      </trans-unit>
+      <trans-unit id="alert.summary.greetings">
+        <source>alert.summary.greetings</source>
+        <target state="needs-translation">alert.summary.greetings</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
