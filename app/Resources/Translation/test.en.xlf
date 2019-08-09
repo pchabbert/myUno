@@ -2,11 +2,20 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="fr" datatype="plaintext" original="file.ext" target-language="en">
     <body>
-      <trans-unit id="alert.summary.subject">
+      <trans-unit id="alert.summary.subject" approved="yes">
         <source>alert.summary.subject</source>
-        <target state="translated">Subject</target>
+        <target state="translated">Subjectfzeazd</target>
+        <alt-trans>
+          <target>Subjectfzefze</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Subjectafaf</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Subject</target>
+        </alt-trans>
       </trans-unit>
-      <trans-unit id="alert.summary.greetings">
+      <trans-unit id="alert.summary.greetings" approved="yes">
         <source>alert.summary.greetings</source>
         <target state="translated">Hello!</target>
       </trans-unit>
